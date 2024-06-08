@@ -1,0 +1,26 @@
+{% extends "admin/change_form.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_country').change(function() {
+            var countryId = $(this).val();
+            $.ajax({
+                url: '/api/get-cities/' + countryId + '/',
+                success: function(data) {
+                    var citySelect = $('#id_city');
+                    citySelect.empty();
+                    citySelect.append('<option value="">Select a city</option>');
+                    $.each(data, function(index, item) {
+                        citySelect.append('<option value="' + item.id + '">' + item.name + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+</script>
+{% endblock %}

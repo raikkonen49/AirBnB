@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,9 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_countries',
     'rest_framework',
+    'drf_yasg',
 ]
+
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['en']
+CITIES_LIGHT_INCLUDE_COUNTRIES = []  # пустой список для включения всех стран
+CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL']  # включить только города (тип PPL)
+CITIES_LIGHT_INCLUDE_CITY_ALTERNATIVE_NAMES = False  # не включать альтернативные названия городов
+CITIES_LIGHT_INCLUDE_ALL_CITY_TYPES = False  # не включать все типы населенных пунктов
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -61,7 +69,10 @@ ROOT_URLCONF = 'AirBnB.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [
+        #     os.path.join(BASE_DIR, 'Air', 'templates'),
+        # ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +139,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CITIES_SKIP_CITIES_WITH_EMPTY_REGIONS = True
