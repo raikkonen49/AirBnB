@@ -26,7 +26,12 @@ SECRET_KEY = 'django-insecure-_ddi20_fg#4adl9^wfi*1&yz6+=*)j@n5s&9k-7zm4djo@6ub!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+    "http://192.168.1.4:3000",
+    "http://localhost:3000",
+]
 
 
 
@@ -43,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
 ]
 
 CITIES_LIGHT_TRANSLATION_LANGUAGES = ['en']
@@ -62,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'AirBnB.urls'
