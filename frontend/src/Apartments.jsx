@@ -2,30 +2,21 @@ import React from "react";
 
 const Apartment = (props) => {
   return (
-    <>
-      <div>
-        <strong>{props.apartment.id}. Name: {props.apartment.apartment_name}</strong>
+    <div className="col col-lg-4">
+      <div className="equalize-me">
+        <img src={props.apartment.image} alt="Apartment" style={{ maxWidth: '100%', height: 'auto' }} />
       </div>
       <div>
-        {props.apartment.id}. Вescription: {props.apartment.description}
+        <strong>{props.apartment.city} ({props.apartment.country})</strong>
       </div>
       <div>
-        {props.apartment.id}. Price: {props.apartment.price}
+        {props.apartment.date}
       </div>
       <div>
-        {props.apartment.id}. Date: {props.apartment.date}
+        <strong>€ {props.apartment.price} ночь</strong>
       </div>
-      <div>
-        {props.apartment.id}. Image: {props.apartment.image}
-      </div>
-      <div>
-        {props.apartment.id}. Country: {props.apartment.country}
-      </div>
-      <div>
-        {props.apartment.id}. City: {props.apartment.city}
-      </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
 export default Apartment;
