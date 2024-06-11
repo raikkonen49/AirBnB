@@ -22,6 +22,9 @@ $(document).ready(function() {
     equalizeHeight('.equalize-me');
     equalizeHeight('.check');
     equalizeHeight('.search-block-item');
+
+
+
 });
 
 }

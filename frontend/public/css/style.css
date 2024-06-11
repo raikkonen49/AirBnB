@@ -406,6 +406,26 @@ img {
     margin-bottom: 20px;
 }
 
+.select2-container--default .select2-selection--single {
+            background-color: red; /* Фон Select2 */
+            border: 1px solid red; /* Цвет рамки */
+            color: white; /* Цвет текста */
+        }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: red; /* Фон выделенного элемента в выпадающем списке */
+            color: white; /* Цвет текста выделенного элемента */
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: red; /* Фон выбранных элементов (для множественного выбора) */
+            color: white; /* Цвет текста выбранных элементов */
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            color: white; /* Цвет иконки удаления выбранного элемента */
+        }
+
 
 @media screen and (max-height: 767px) {
 

@@ -1,16 +1,18 @@
 import React from "react";
 import Apartment from './Apartments';
 
-const ApartmentsList = ({Apartments}) => {
-  if (!Apartments.length) {
-    return <p>No found</p>
+const ApartmentsList = ({ apartments }) => {
+  if (!apartments || apartments.length === 0) {
+    return <p>No apartments found</p>;
   }
 
   return (
     <div className="container">
-        <div className="row">
-          {Apartments.map(apartment =><Apartment apartment={apartment} key={apartment.id}/>)}
-        </div>
+      <div className="row">
+        {apartments.map(apartment => (
+          <Apartment key={apartment.id} apartment={apartment} />
+        ))}
+      </div>
     </div>
   );
 };
