@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from './Logo';
 
-const Header = () => {
+const Header = ({ searchTerm, onSearchChange, onSearchSubmit, sortOption, onSortChange }) => {
   return (
     <header>
     <div class="container">
@@ -32,7 +32,12 @@ const Header = () => {
                     <strong>Где</strong>
                 </div>
                 <div class="col col-sm-12">
-                    <input placeholder="Поиск направлений" type="text" name="" value=""/>
+                <input
+                    placeholder="Поиск направлений"
+                    type="text"
+                    value={searchTerm}
+                    onChange={onSearchChange}
+                />
                 </div>
             </div>
             <div class="col col-lg-2 search-block-item">
@@ -58,8 +63,20 @@ const Header = () => {
                 <div class="col col-sm-12">
                     Кто едет?
                 </div>
-                <button type="button" name="button">отправить</button>
+                 <button type="button" name="button" onClick={onSearchSubmit}>Отправить</button>
             </div>
+        </div>
+        <div className="row sort-block">
+          <div className="col col-lg-12">
+            <label>
+              Сортировать по:
+              <select value={sortOption} onChange={onSortChange}>
+                <option value="newest">Новые</option>
+                <option value="cheapest">Самые дешевые</option>
+                <option value="mostExpensive">Самые дорогие</option>
+              </select>
+            </label>
+          </div>
         </div>
     </div>
     </header>
