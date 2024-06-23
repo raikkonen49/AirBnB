@@ -1,30 +1,21 @@
 import $ from 'jquery';
+
 export function initializeScripts() {
-$(document).ready(function() {
-    function equalizeHeight(selector) {
-        // Получаем все элементы по заданному селектору
-        var elements = $(selector);
+  $(document).ready(() => {
+    const equalizeHeight = (selector) => {
+      const elements = $(selector);
+      let maxHeight = 0;
 
-        // Находим максимальную высоту среди всех элементов
-        var maxHeight = 0;
-        elements.each(function() {
-            var elementHeight = $(this).outerHeight();
-            if (elementHeight > maxHeight) {
-                maxHeight = elementHeight;
-            }
-        });
+      elements.each(function() {
+        const elementHeight = $(this).outerHeight();
+        maxHeight = Math.max(maxHeight, elementHeight);
+      });
 
-        // Устанавливаем максимальную высоту для всех элементов
-        elements.css('height', maxHeight);
-    }
+      elements.css('height', maxHeight);
+    };
 
-    // Вызов функции для разных классов
     equalizeHeight('.equalize-me');
     equalizeHeight('.check');
     equalizeHeight('.search-block-item');
-
-
-
-});
-
+  });
 }

@@ -29,6 +29,7 @@ class ApartmentDetails(models.Model):
     apartment_name = models.CharField(max_length=60)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
+    address = models.CharField(max_length=255, default='')
     description = models.TextField()
     price = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)

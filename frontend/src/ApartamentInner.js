@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import MapComponent from './MapComponent';
 
 const ApartamentInner = ({ apartments }) => {
   const { id } = useParams();
@@ -10,13 +11,42 @@ const ApartamentInner = ({ apartments }) => {
   }
 
   return (
-    <div className="container mt-5">
-      <h1>Детальная информация об апартаменте</h1>
-      <img src={apartment.image} alt="Apartment" style={{ maxWidth: '100%', height: 'auto' }} />
-      <p>Город: {apartment.city}</p>
-      <p>Страна: {apartment.country}</p>
-      <p>Цена: €{apartment.price} за ночь</p>
-    </div>
+      <div className="row apartment-inner-cont">
+        <div className="col-xl-6">
+          <div className="col col-lg-12 apartment-inner-name">
+            <h1><strong>{apartment.apartment_name}</strong></h1>
+          </div>
+          <div className="col col-lg-12 apartment-inner-image">
+            <img src={apartment.image} alt="Apartment" style={{ maxWidth: '100%', height: 'auto' }} />
+          </div>
+          <div className="col col-lg-12 apartment-inner-gallery">
+
+          </div>
+          <div className="col col-lg-12 apartment-inner-place">
+            {apartment.city}, {apartment.country}
+          </div>
+          <div className="col col-lg-12 apartment-inner-adress">
+            {apartment.address}
+          </div>
+          <div className="col col-lg-12 apartment-inner-price">
+            Цена: €{apartment.price} за ночь
+          </div>
+          <div className="col col-lg-12 apartment-inner-owner">
+            <strong>Хозяин: Jubilee</strong>
+          </div>
+          <div className="col col-lg-12 apartment-inner-description">
+          {apartment.description}
+          </div>
+        </div>
+        <div className="col-xl-6">
+        <div className="col col-lg-12 apartment-inner-name">
+          <strong>Карта местности</strong>
+        </div>
+          <div className="col col-lg-12 map-block">
+            <MapComponent address={apartment.address} />
+          </div>
+        </div>
+      </div>
   );
 };
 

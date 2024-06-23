@@ -1,5 +1,4 @@
 /* Reset */
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -13,15 +12,14 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
 }
 
 /* HTML5 display-role reset for older browsers */
-
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block;
 }
@@ -71,9 +69,7 @@ table {
 }
 
 /* -- END RESET -- */
-
 /* -- main styles -- */
-
 .nopad {
     padding: 0px;
 }
@@ -197,7 +193,6 @@ img {
 .fancybox-inner {
     margin: 20px 0;
 } */
-
 .hamburger {
     padding: 11px 10px 2px 10px;
     border-radius: 6px;
@@ -212,8 +207,8 @@ img {
     border: 0;
     margin: 0;
     overflow: visible;
-	position: relative;
-	z-index: 20;
+    position: relative;
+    z-index: 20;
 }
 
 .hamburger-box {
@@ -291,50 +286,54 @@ img {
     background-color: #fff;
 }
 
-.carousel-inner > .item {
-  opacity: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: block;
-  position: absolute;
-  z-index: 0;
-  -webkit-transition: opacity 1s ease;
-  -o-transition: opacity 1s ease;
-   transition: opacity 1s ease;
-  -webkit-transform: translate3d(0, 0, 0) !important;
-   transform: translate3d(0, 0, 0) !important;
+.carousel-inner>.item {
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+    position: absolute;
+    z-index: 0;
+    -webkit-transition: opacity 1s ease;
+    -o-transition: opacity 1s ease;
+    transition: opacity 1s ease;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    transform: translate3d(0, 0, 0) !important;
 }
-.carousel-inner > .item:first-of-type {
-  position: relative;
+
+.carousel-inner>.item:first-of-type {
+    position: relative;
 }
-.carousel-inner > .active {
-  opacity: 1;
-  z-index: 3;
+
+.carousel-inner>.active {
+    opacity: 1;
+    z-index: 3;
 }
-.carousel-inner > .next.left,
-.carousel-inner > .prev.right {
-  -webkit-transition: opacity 1s ease-in-out;
-  -o-transition: opacity 1s ease-in-out;
-  transition: opacity 1s ease-in-out;
-  opacity: 1;
-  left: 0;
-  z-index: 2;
+
+.carousel-inner>.next.left,
+.carousel-inner>.prev.right {
+    -webkit-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+    left: 0;
+    z-index: 2;
 }
-.carousel-inner > .active.left,
-.carousel-inner > .active.right {
-  z-index: 1;
+
+.carousel-inner>.active.left,
+.carousel-inner>.active.right {
+    z-index: 1;
 }
+
 .carousel-control {
-  z-index: 4;
+    z-index: 4;
 }
 
 /*   start   */
-
 .row {
     margin-left: auto;
     margin-right: auto;
-    max-width: 1800px;
+    max-width: 1320px;
 }
 
 .container {
@@ -342,57 +341,53 @@ img {
 }
 
 .header {
-	padding-top: 10px;
-	margin-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
 }
 
 .logo {
-	position:relative;
-
+    position: relative;
 }
 
 .logo img {
-	width: 102px;
-	position: absolute;
-	top: 50%;
+    width: 102px;
+    position: absolute;
+    top: 50%;
     transform: translateY(-50%);
 }
 
 .header-selector {
-	text-align: center;
+    text-align: center;
 }
 
 .header-selector ul li {
-	display: inline-block;
+    display: inline-block;
 }
 
 .header-selector ul li button {
-	font-size: 16px;
-	padding: 10px;
-	color: #6a6a6a;
-	background-color: white;
-	border: 0 solid;
-	border-radius: 32px;
+    font-size: 16px;
+    padding: 10px;
+    color: #6a6a6a;
+    background-color: white;
+    border: 0 solid;
+    border-radius: 32px;
 }
 
 .header-selector ul li button:hover {
-	background-color: #F7F7F7;
-	color: #222222;
+    background-color: #F7F7F7;
+    color: #222222;
 }
 
 .search-block-item {
-	position: relative;
+    position: relative;
 }
 
 .search-block-item button {
-	position: absolute;
-	right: 0;
-	top: 50%;
+    position: absolute;
+    right: 0;
+    top: 50%;
     transform: translateY(-50%);
 }
-
-
-
 
 .row-header {
     margin-left: auto;
@@ -401,44 +396,48 @@ img {
 }
 
 .search-block {
-	border: 1px solid #DDDDDD;
-	border-radius: 32px;
+    border: 1px solid #DDDDDD;
+    border-radius: 32px;
     margin-bottom: 20px;
 }
 
-.select2-container--default .select2-selection--single {
-            background-color: red; /* Фон Select2 */
-            border: 1px solid red; /* Цвет рамки */
-            color: white; /* Цвет текста */
-        }
-
-        .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: red; /* Фон выделенного элемента в выпадающем списке */
-            color: white; /* Цвет текста выделенного элемента */
-        }
-
-        .select2-container--default .select2-selection--multiple .select2-selection__choice {
-            background-color: red; /* Фон выбранных элементов (для множественного выбора) */
-            color: white; /* Цвет текста выбранных элементов */
-        }
-
-        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-            color: white; /* Цвет иконки удаления выбранного элемента */
-        }
-
-
-@media screen and (max-height: 767px) {
-
-
-
+.sort-block {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 20px;
 }
 
+.apartment-inner-name {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.apartment-inner-gallery, .apartment-inner-adress, .apartment-inner-image, .apartment-inner-place, .apartment-inner-price, .apartment-inner-owner, .apartment-inner-description {
+    margin-bottom: 15px;
+}
+
+.apartment-inner-owner {
+    font-size: 20px;
+    padding: 10px 0 10px 0;
+    border-top: 1px solid #B0B0B0;
+    border-bottom: 1px solid #B0B0B0;
+}
+
+.apartment-inner-description {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.check ul li {
+    display: inline-block;
+}
+
+@media screen and (max-height: 767px) {}
+
 @media screen and (min-width: 767px) {
-
-     a[href*="tel:"] {
-        cursor:default;
-		pointer-events: none;
-		color: #fff;
+    a[href*="tel:"] {
+        cursor: default;
+        pointer-events: none;
+        color: #fff;
     }
-
 }
