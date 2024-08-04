@@ -4,7 +4,6 @@ import axios from 'axios';
 import ApartmentsList from './ApartmentsList';
 import ApartamentInner from './ApartamentInner';
 import Header from './Header';
-import { initializeScripts } from './js/main.js';
 import Register from './Register';
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
@@ -13,21 +12,57 @@ import authService from './authService';
 import Home from './Home';
 
 const API_URL = 'http://127.0.0.1:8000/api/apartments/';
+const EXCHANGE_RATE_API_URL = 'https://api.exchangerate-api.com/v4/latest/EUR';
 
 function App() {
   const [apartments, setApartments] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('newest');
   const [currentUser, setCurrentUser] = useState(null);
+  const [currency, setCurrency] = useState('EUR');
+  const [exchangeRate, setExchangeRate] = useState(null);
 
   const handleSearchChange = (event) => setSearchTerm(event.target.value);
   const handleSearchSubmit = () => {};
-  const handleSortChange = (event) => setSortOption(event.target.value);
+
+  const handleSortChange = (newSortOption) => {
+    setSortOption(newSortOption);
+  };
 
   const handleLogout = () => {
     authService.logout();
     setCurrentUser(null);
   };
+
+  useEffect(() => {
+    axios.get(API_URL)
+      .then(response => setApartments(response.data))
+      .catch(error => console.error('Error fetching apartments:', error));
+  }, []);
+
+  useEffect(() => {
+    authService.getCurrentUser().then(user => {
+      if (user) {
+        setCurrentUser(user);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const fetchExchangeRate = async () => {
+      try {
+        const response = await axios.get(EXCHANGE_RATE_API_URL);
+        setExchangeRate(response.data.rates);
+      } catch (error) {
+        console.error('Ошибка при получении курса валют', error);
+      }
+    };
+
+    fetchExchangeRate();
+    const intervalId = setInterval(fetchExchangeRate, 60000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const filteredApartments = apartments.filter(apartment =>
     apartment.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -40,25 +75,6 @@ function App() {
     return new Date(b.date) - new Date(a.date);
   });
 
-  useEffect(() => {
-    axios.get(API_URL)
-      .then(response => setApartments(response.data))
-      .catch(error => console.error('Error fetching apartments:', error));
-  }, []);
-
-  useEffect(() => {
-    initializeScripts();
-  }, [apartments]);
-
-  useEffect(() => {
-    authService.getCurrentUser().then(user => {
-      if (user) {
-        console.log('Current User in App:', user); // Логирование текущего пользователя в App
-        setCurrentUser(user);
-      }
-    });
-  }, []);
-
   return (
     <Router>
       <Header
@@ -69,10 +85,19 @@ function App() {
         onSortChange={handleSortChange}
         currentUser={currentUser}
         onLogout={handleLogout}
+        currency={currency}
+        setCurrency={setCurrency}
+        exchangeRate={exchangeRate}
       />
       <Routes>
         <Route path="/" element={<ApartmentsList apartments={sortedApartments} />} />
-        <Route path="/apartment/:id" element={<ApartamentInner apartments={apartments} />} />
+        <Route path="/apartment/:id" element={
+          <ApartamentInner
+            apartments={apartments}
+            currency={currency}
+            exchangeRate={exchangeRate}
+          />
+        } />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
         <Route path="/protected" element={<PrivateRoute component={ProtectedComponent} />} />

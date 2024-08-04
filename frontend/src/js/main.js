@@ -19,3 +19,7 @@ export function initializeScripts() {
     equalizeHeight('.search-block-item');
   });
 }
+
+$('#currency').select2({
+    minimumResultsForSearch: Infinity // Отключаем поиск для простого списка
+});

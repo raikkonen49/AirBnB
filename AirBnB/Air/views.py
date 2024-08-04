@@ -5,12 +5,13 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Country, City, ApartmentDetails
 from .serializers import CountrySerializer, CitySerializer, ApartmentDetailsSerializer
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from .serializers import UserSerializer, LoginSerializer
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
+
 
 class CountryViewSet(viewsets.ModelViewSet):
     queryset = Country.objects.all().order_by('name')

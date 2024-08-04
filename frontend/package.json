@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
+    "dompurify": "^3.1.6",
     "jquery": "^3.7.1",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
@@ -15,6 +16,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.1",
     "react-scripts": "5.0.1",
+    "select2": "^4.1.0-rc.0",
+    "tinymce": "^7.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

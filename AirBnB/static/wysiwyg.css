@@ -1,0 +1,21 @@
+.quill-container {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-height: 300px;  /* Установим минимальную высоту */
+    margin-bottom: 20px;  /* Добавим отступ снизу */
+}
+
+.quill-toolbar {
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px 4px 0 0;
+    background: #f9f9f9;
+}
+
+.quill-container .ql-editor {
+    min-height: 200px;  /* Установим минимальную высоту для редактора */
+    padding: 10px;
+}
+
+textarea.wysiwyg {
+    display: none;
+}

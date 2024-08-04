@@ -1,0 +1,11 @@
+{% extends "admin/base_site.html" %}
+
+{% load static %}  <!-- Добавьте эту строку -->
+
+{% block extrahead %}
+    {{ block.super }}
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="{% static 'wysiwyg.js' %}"></script>
+    <link href="{% static 'wysiwyg.css' %}" rel="stylesheet">
+{% endblock %}
