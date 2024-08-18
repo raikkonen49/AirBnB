@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import ApartmentDetails, Country, City
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django import forms
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,8 +28,15 @@ class ApartmentDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ApartmentDetails
-        fields = ['id', 'apartment_name', 'country', 'city', 'address', 'description', 'price', 'date', 'image']
+        fields = ['id', 'apartment_name', 'country', 'city', 'address', 'description', 'price', 'date', 'image', 'check_in_date', 'check_out_date', 'max_guests']
 
+class ApartmentDetailsForm(forms.ModelForm):
+    check_in_date = forms.DateField(input_formats=['%d/%m/%Y'])
+    check_out_date = forms.DateField(input_formats=['%d/%m/%Y'])
+
+    class Meta:
+        model = ApartmentDetails
+        fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

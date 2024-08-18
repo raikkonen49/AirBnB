@@ -23,11 +23,25 @@ function App() {
   const [exchangeRate, setExchangeRate] = useState(null);
 
   const handleSearchChange = (event) => setSearchTerm(event.target.value);
-  const handleSearchSubmit = () => {};
 
-  const handleSortChange = (newSortOption) => {
-    setSortOption(newSortOption);
-  };
+  const handleSearchSubmit = async ({ checkInDate, checkOutDate }) => {
+    console.log("Received checkInDate:", checkInDate);
+    console.log("Received checkOutDate:", checkOutDate);
+
+    try {
+        const response = await axios.get(API_URL, {
+            params: {
+                check_in_date: checkInDate,  // Даты уже должны быть в нужном формате
+                check_out_date: checkOutDate,
+            },
+        });
+        setApartments(response.data);
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+    }
+};
+
+  const handleSortChange = (newSortOption) => setSortOption(newSortOption);
 
   const handleLogout = () => {
     authService.logout();

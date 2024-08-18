@@ -33,6 +33,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
+
 
 
 

@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.http import JsonResponse
 
@@ -34,6 +35,9 @@ class ApartmentDetails(models.Model):
     price = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='images/apartments')
+    check_in_date = models.DateField(default=datetime.date.today)  # Дата въезда по умолчанию - сегодня
+    check_out_date = models.DateField(default=datetime.date.today)  # Дата выезда по умолчанию - сегодня
+    max_guests = models.IntegerField()
 
     def __str__(self):
         return self.apartment_name

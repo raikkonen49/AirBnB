@@ -10,8 +10,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from .serializers import UserSerializer, LoginSerializer
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-
+from django.db.models import Q
 
 class CountryViewSet(viewsets.ModelViewSet):
     queryset = Country.objects.all().order_by('name')
@@ -24,6 +23,18 @@ class CityViewSet(viewsets.ModelViewSet):
 class ApartmentDetailsViewSet(viewsets.ModelViewSet):
     queryset = ApartmentDetails.objects.all()
     serializer_class = ApartmentDetailsSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        check_in_date = self.request.query_params.get('check_in_date', None)
+        check_out_date = self.request.query_params.get('check_out_date', None)
+
+        if check_in_date and check_out_date:
+            queryset = queryset.filter(
+                Q(check_in_date__lte=check_in_date, check_out_date__gte=check_in_date) |
+                Q(check_in_date__lte=check_out_date, check_out_date__gte=check_out_date)
+            )
+        return queryset
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = UserSerializer
@@ -46,7 +57,7 @@ class LoginView(generics.GenericAPIView):
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
-            'username': user.username,  # Добавляем username в ответ
+            'username': user.username,
         })
 
 class CurrentUserView(generics.RetrieveAPIView):

@@ -1,20 +1,20 @@
-import React, { useEffect, useMemo } from 'react';
-import Logo from './Logo';
+import React, { useState, useEffect, useMemo } from 'react';
+import Logo from './logo';
 import { Link } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import $ from 'jquery';
 import 'select2/dist/css/select2.min.css';
 import 'select2';
 
 const Header = ({ searchTerm, onSearchChange, onSearchSubmit, sortOption, onSortChange, currentUser, onLogout, setCurrency, currency, exchangeRate }) => {
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
 
   useEffect(() => {
-    // Инициализация Select2 на элементе select с id 'currency'
     $('#currency').select2();
-
-    // Инициализация Select2 на элементе select в блоке sort-block
     $('.sort-block select').select2();
 
-    // Обработчик изменения валюты через Select2
     $('#currency').on('change', function() {
       const newCurrency = $(this).val();
       if (newCurrency) {
@@ -22,7 +22,6 @@ const Header = ({ searchTerm, onSearchChange, onSearchSubmit, sortOption, onSort
       }
     });
 
-    // Обработчик изменения сортировки через Select2
     $('.sort-block select').on('change', function() {
       const newSortOption = $(this).val();
       if (newSortOption) {
@@ -30,12 +29,33 @@ const Header = ({ searchTerm, onSearchChange, onSearchSubmit, sortOption, onSort
       }
     });
 
-    // Очистка Select2 при размонтировании компонента
     return () => {
       $('#currency').select2('destroy');
       $('.sort-block select').select2('destroy');
     };
   }, [onSortChange, setCurrency]);
+
+  const handleSearchSubmit = () => {
+    console.log("checkInDate:", checkInDate);
+    console.log("checkOutDate:", checkOutDate);
+
+    const isValidDate = (date) => {
+        return date instanceof Date && !isNaN(date);
+    };
+
+    const formatDate = (date) => {
+        return isValidDate(date) ? date.toISOString().split('T')[0] : null;
+    };
+
+    const formattedCheckInDate = formatDate(checkInDate);
+    const formattedCheckOutDate = formatDate(checkOutDate);
+
+    console.log("Formatted checkInDate:", formattedCheckInDate);
+    console.log("Formatted checkOutDate:", formattedCheckOutDate);
+
+    onSearchSubmit({ checkInDate: formattedCheckInDate, checkOutDate: formattedCheckOutDate });
+};
+
 
   const currentUsername = useMemo(() => {
     if (currentUser && currentUser.username) {
@@ -118,7 +138,13 @@ const Header = ({ searchTerm, onSearchChange, onSearchSubmit, sortOption, onSort
               <strong>Прибытие</strong>
             </div>
             <div className="col col-sm-12">
-              Когда?
+              <DatePicker
+                selected={checkInDate}
+                onChange={date => setCheckInDate(date)}
+                placeholderText="Когда?"
+                dateFormat="dd/MM/yyyy"
+                className="form-control"
+              />
             </div>
           </div>
           <div className="col col-lg-2 search-block-item">
@@ -126,17 +152,20 @@ const Header = ({ searchTerm, onSearchChange, onSearchSubmit, sortOption, onSort
               <strong>Выезд</strong>
             </div>
             <div className="col col-sm-12">
-              Когда?
+              <DatePicker
+                selected={checkOutDate}
+                onChange={date => setCheckOutDate(date)}
+                placeholderText="Когда?"
+                dateFormat="dd/MM/yyyy"
+                className="form-control"
+              />
             </div>
           </div>
           <div className="col col-lg-4 search-block-item">
             <div className="col col-sm-12">
-              <strong>Выезд</strong>
+              <strong>Кто едет?</strong>
             </div>
-            <div className="col col-sm-12">
-              Кто едет?
-            </div>
-            <button type="button" onClick={onSearchSubmit}>Отправить</button>
+            <button type="button" onClick={handleSearchSubmit}>Отправить</button>
           </div>
         </div>
         <div className="row">
